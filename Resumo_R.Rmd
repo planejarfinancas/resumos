@@ -1,0 +1,11 @@
+---
+title: "Resumo_Linguagem_R"
+author: "Pedro_Lima"
+date: "15/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
