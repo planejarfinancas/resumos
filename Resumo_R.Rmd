@@ -6,8 +6,8 @@ date: "15/10/2020"
 output:
   html_document:
     number_sections: yes #numera os capítulos
-    toc: yes #gera o indice lateral
-    toc_depth: 3 # Até quantos titulos vai abrir, vai de 1 a 6 com padrão 3
+    toc: false #gera o indice lateral
+    toc_depth: 6 # Até quantos titulos vai abrir, h1, h2, h3, h4, etc.
     toc_float:   
       collapsed: yes #starta colapsado o sumário lateral
     code_folding: hide #abre opçaõ de ocultar todos os códigos e apertar o botão, opção show
@@ -15,13 +15,10 @@ output:
     fig_height: 6 #padroniza a altura das figuras em polegadas
     fig_width: 7 #padroniza a largura das figuras em polegadas, podera altarar posteriormente.
     highlight: tango #Opções de personalização de apresentação do chunk (tango, pygments, kate, monochrome, espresso, zenburn, haddock, breezedark, e textmate)
-    theme: journal #Só funciona para html, altera o layout de apresentação, opções: (cerulean, journal, flatly, darkly, readable, spacelab, united, cosmo, lumen, paper, sandstone, simplex e yeti.)
+    theme: united #Só funciona para html, altera o layout de apresentação, opções: (cerulean, journal, flatly, darkly, readable, spacelab, united, cosmo, lumen, paper, sandstone, simplex e yeti.)
     df_print: paged #forma de exibição das tabelas, opções: kable, tibble e  paged
 bibliography: Ref.bib #Este é o nome do arquivo.
 link-citations: yes #ao clicar em uma sitação vai levar para a referência.
-editor_options: 
-  markdown: 
-    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
@@ -32,15 +29,72 @@ if(!require("tidyr")) install.packages("tidyr")
 
 # RMarkdown
 
-## Formatar Figuras
+# Github
 
-Chamando a referencia @Simpson para teste Largura: fig.width Altura:
-fig.height Inserir legenda: fig.cap Alinhamento: fig.align; 'left',
-'center'ou 'right' Tamanho da figura com relação a página do documento:
-% de largura da página: out.width % de comprimento da página: out.height
+## Configurações
 
-# Código
+Abra o terminal do Git Bash em C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git
 
-## Detalhando as funções do chunk
+![image1](images/2.png){width="400"}
 
-\#Referências
+Configurar git
+
+``` {.r}
+git config –global user.name "pedro-pc"
+
+git config –global user.email "pedroufv@yahoo.com.br"
+
+git config –global core.editor "code –wait"
+```
+
+verificar se deu certo
+
+``` {.r}
+git config user.name
+
+git config user.email
+
+git config core.editor
+```
+
+Configurar chaves SSH
+
+Para verificar se tem chave cadastrada pelo git bash
+
+*ls -al \~/.ssh*
+
+se tiver chave cadastrada
+
+![](images/3.png)
+
+[Se não tiver]{.ul}
+
+![](images/4.png){width="400"}
+
+## Configurações {.tabset .tabset-pills}
+
+
+### Config
+
+``` {.r}
+git config –global user.name "pedro-pc"
+
+git config –global user.email "pedroufv@yahoo.com.br"
+
+git config –global core.editor "code –wait"
+```
+
+
+### Verifica
+
+
+``` {.r}
+git config user.name
+
+git config user.email
+
+git config core.editor
+```
+## {-}
+
+Meu nome é pedro
