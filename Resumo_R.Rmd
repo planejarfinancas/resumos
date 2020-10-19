@@ -19,26 +19,28 @@ output:
     df_print: paged #forma de exibição das tabelas, opções: kable, tibble e  paged
 bibliography: Ref.bib #Este é o nome do arquivo.
 link-citations: yes #ao clicar em uma sitação vai levar para a referência.
-#o esquema de referência abaixo não funciona em PDF, utilize o sistema acima com .bib
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+if(!require("dplyr")) install.packages("dplyr")
+if(!require("tidyr")) install.packages("tidyr")
 ```
 
-# Açoes em figuras
+# RMarkdown
 
-Chamando a referencia @Simpson para teste
-Largura: fig.width
-Altura: fig.height
-Inserir legenda: fig.cap
-Alinhamento: fig.align; ‘left’, ‘center’ou ’right’
-Tamanho da figura com relação a página do documento:
-% de largura da página: out.width
-% de comprimento da página: out.height
+## Formatar Figuras
 
-# Código 
+Chamando a referencia @Simpson para teste Largura: fig.width Altura:
+fig.height Inserir legenda: fig.cap Alinhamento: fig.align; 'left',
+'center'ou 'right' Tamanho da figura com relação a página do documento:
+% de largura da página: out.width % de comprimento da página: out.height
+
+# Código
 
 ## Detalhando as funções do chunk
 
-#Referências
+\#Referências
