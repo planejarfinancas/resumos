@@ -7,7 +7,7 @@ output:
   html_document:
     number_sections: yes #numera os capítulos
     toc: false #gera o indice lateral
-    toc_depth: 6 # Até quantos titulos vai abrir, h1, h2, h3, h4, etc.
+    toc_depth: 3 # Até quantos titulos vai abrir, h1, h2, h3, h4, etc.
     toc_float:   
       collapsed: yes #starta colapsado o sumário lateral
     code_folding: hide #abre opçaõ de ocultar todos os códigos e apertar o botão, opção show
@@ -18,18 +18,121 @@ output:
     theme: united #Só funciona para html, altera o layout de apresentação, opções: (cerulean, journal, flatly, darkly, readable, spacelab, united, cosmo, lumen, paper, sandstone, simplex e yeti.)
     df_print: paged #forma de exibição das tabelas, opções: kable, tibble e  paged
 bibliography: Ref.bib #Este é o nome do arquivo.
-link-citations: yes #ao clicar em uma sitação vai levar para a referência.
+link-citations: yes #ao clicar em uma sitação vai levar para a referência
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-if(!require("dplyr")) install.packages("dplyr")
-if(!require("tidyr")) install.packages("tidyr")
+knitr::opts_chunk$set(echo = TRUE, collapse = TRUE)
+if(!require("rmarkdown")) install.packages("rmarkdown")
+if(!require("tidyverse")) install.packages("tidyverse")
+if(!require("lubridate")) install.packages("lubridate")
+if(!require("DT")) install.packages("DT")
+
 ```
 
 # RMarkdown
 
+## Links
+
+Site do Knitr com todas as configurações <https://yihui.org/knitr/options/>
+
+Publicar no Github <https://www.curso-r.com/blog/2019-08-28-bookdown/>
+
+## Chunk
+
+**error** = TRUE continua a renderização mesmo com erro\
+**results** = FALSE oculta a saída de texto, mostra um resultado mais limpo, tem mais opções de escolha que não apenas F\
+**echo** = F executa exibe os resultados e oculta o código, ótimo para figuras e gráficos\
+**eval** = F não executa o código, útil quando vai apenas mostrar um código de exemplo\
+**Include** = FALSE \# executa código porém oculta códito e resultados, ótimo para utilizar os resultados sem imprimir\
+**message** = FALSE \#oculta mensagens do resultado\
+**warning** = FALSE \#oculta avisos do resultado\
+**fig.show** = 'hide' gera o gráfico mas oculta na impressão\
+**fig.cap** = "..." \#define a legenda da figura aos resultados gráficos produzidas pelo chunk\
+**fig.align:** define o alinhamento da figura produzida pelo chunk\
+**fig.height e fig.width**: define as dimensões da figura produzida pelo chunk
+
+## Cache
+
+Se ao rodar o knitr verificar que o código não mudou, busca o resultado armazenado no cache
+
+**cache** = TRUE \#Quando tiver cálculos muito grandes e demorados
+
+CUIDADO: por padrão este sistema é baseado apenas no código do chunk e não em suas dependências.
+
+```{r raw_data, include=TRUE, warning = FALSE,message = FALSE}
+rawdata <- readr::read_csv("tables/table_mtcars.csv")
+```
+
+```{r processed_data, cached = TRUE, include=TRUE}
+#não identifica alterações no chunk anterior ou no banco de dados
+mean(rawdata$mpg)
+```
+
+```{r processed_data2, cached = TRUE, dependson = "raw_data"}
+#identificação de alteração do chunk anterior, mas não do arquivo. csv
+mean(rawdata$mpg)
+```
+
+```{r raw_data2,cache.extra=file.info("tables/table_mtcars.csv"), include=TRUE, warning = FALSE, message = FALSE}
+#Força identificar alterações do arquivo .csv
+rawdata <- readr::read_csv("tables/table_mtcars.csv")
+mean(rawdata$mpg)
+```
+
+## Impressão de figuras
+
+**Sugestões**:
+
+**fig.width** = 6, fig.asp = 0.618\
+**out.width** = "70%", fig.align = "center"\
+
+Para vários gráficos em uma única linha,
+
+**fig.align** = "default"\
+**Out.width** = "50% \# para dois gráficos\
+**Out.width** = "33% \# para três gráficos\
+**Out.width** = "25% \# para quatro gráficos\
+**fig.show**='**hold**' \#força quebrar blocos grandes de código com sua explicação e imprime o gráfico após, para não mostrar o gráfico escolha opção '**hide**'\
+**fig.cap** = "texto para legenda"
+
+```{r pressure, echo=FALSE, fig.width = 6, fig.asp = 0.618, fig.cap = "Texto para legenda"}
+ggplot(data = pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+
+```
+
 # Github
+
+## Links
+
+[Exelente material de leitura](http://swcarpentry.github.io/git-novice/reference.html)
+
+[Resumo comandos](https://training.github.com/downloads/pt_BR/github-git-cheat-sheet/)
+
+[Workshop](https://open-source-for-researchers.github.io/open-source-workshop/)
+
+Modelos de selos para readme.md, só funciona em repositórios públicos
+
+<https://shields.io/>
+
+Vídeo como acrescentar selos (contador de visualização, etc)
+
+<https://www.youtube.com/watch?v=hQb0I3M2BuQ&list=PLbEOwbQR9lqzK14I7OOeREEIE4k6rjgIj&index=15&ab_channel=ProfessorJos%C3%A9deAssis>
+
+[Help do visual studio code](https://code.visualstudio.com/Docs/editor/versioncontrol)
+
+[Rladies01](https://beatrizmilz.github.io/slidesR/git_rstudio/index.html#26)
+
+[Rladies02](https://beatrizmilz.github.io/RLadies-Git-RStudio-2019/#1)
+
+[Curso completo youtube](https://www.youtube.com/playlist?list=PLbEOwbQR9lqzK14I7OOeREEIE4k6rjgIj)
+
+[Livro Git Pro](https://git-scm.com/book/en/v2)
+
+[Download git](https://git-scm.com/)
+
+[Download github](https://desktop.github.com/)
 
 ## Configurações
 
@@ -73,20 +176,15 @@ se tiver chave cadastrada
 
 ## Configurações {.tabset .tabset-pills}
 
+### 
 
-### Config
+    git config –global user.name "pedro-pc"
 
-``` {.r}
-git config –global user.name "pedro-pc"
+    git config –global user.email "pedroufv@yahoo.com.br"
 
-git config –global user.email "pedroufv@yahoo.com.br"
-
-git config –global core.editor "code –wait"
-```
-
+    git config –global core.editor "code –wait"
 
 ### Verifica
-
 
 ``` {.r}
 git config user.name
@@ -95,6 +193,7 @@ git config user.email
 
 git config core.editor
 ```
-## {-}
+
+##  {.unnumbered}
 
 Meu nome é pedro
